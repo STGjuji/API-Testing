@@ -1,16 +1,17 @@
 <?php
 
+// From URL to get webpage contents.
+$url = "http://localhost:8082/api/authenticate/{{ token }}";
+
+// Initialize a CURL session.
 $ch = curl_init();
 
-curl_setopt($ch, CURLOPT_URL,"http://localhost:8082/api/authenticate");
-curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-curl_setopt($ch, CURLOPT_POSTFIELDS,
-            "postvar1=value1&postvar2=value2&postvar3=value3");
+// Return Page contents.
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//grab URL and pass it to the variable.
+curl_setopt($ch, CURLOPT_URL, $url);
 
-$server_output = curl_exec($ch);
+$result = curl_exec($ch);
 
-curl_close ($ch);
-
+echo $result;
